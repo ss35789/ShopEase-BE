@@ -1,13 +1,14 @@
 package com.shopease.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Getter@Setter
+@Data
 public class User {
 
     @Id
@@ -26,8 +27,6 @@ public class User {
     @Column(nullable = false)
     private String tel;
 
-    @OneToMany(mappedBy = "user")
-    private List<CartItem> cartItems;
 
 
     public User(){}

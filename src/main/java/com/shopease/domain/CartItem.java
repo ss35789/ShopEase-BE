@@ -1,12 +1,12 @@
 package com.shopease.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class CartItem {
 
     @Id
@@ -16,8 +16,7 @@ public class CartItem {
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "item_key")
+    @OneToOne
     private Item item;
 
     @Column(nullable = false)
