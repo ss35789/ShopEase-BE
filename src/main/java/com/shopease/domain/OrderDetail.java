@@ -1,11 +1,8 @@
 package com.shopease.domain;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -31,4 +28,3 @@ public class OrderDetail {
     @Column(nullable = false)
     private Integer priceAt;
 }
-

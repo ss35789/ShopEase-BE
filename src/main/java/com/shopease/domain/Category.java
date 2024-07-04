@@ -3,9 +3,6 @@ package com.shopease.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
 @Entity
@@ -21,5 +18,10 @@ public class Category {
     private String name;
 
     @ManyToMany
-    private List<Item> itemList;
+    @JoinTable(
+            name = "Category_Item",
+            joinColumns = @JoinColumn(name = "categoryKey"),
+            inverseJoinColumns = @JoinColumn(name = "itemKey")
+    )
+    private List<Item> items;
 }
