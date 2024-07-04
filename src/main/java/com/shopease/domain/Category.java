@@ -14,7 +14,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryKey;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categories")
     private List<Item> items;
 
     @Column(nullable = false)

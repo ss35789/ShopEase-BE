@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,15 +17,20 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemKey;
 
-    @Column(nullable = false)
-    private Long categoryKey;
+    @ManyToMany
+    private List<Category> categories;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private Integer price;
+
     @Column(nullable = false)
     private Integer salePrice;
+
     private String content;
+
     private LocalDateTime uploadDate = LocalDateTime.now();
 
     private String img;

@@ -7,18 +7,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Cart {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartKey;
 
-    @Column(nullable = false)
-    private Long userKey;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "item_key")
+    private Item item;
 
     @Column(nullable = false)
-    private Long itemKey;
-
-    @Column(nullable = false)
-    private Integer cnt;
+    private Integer quantity;
 }
