@@ -1,6 +1,7 @@
 package com.shopease.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,15 +18,18 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemKey;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "itemList")
     private List<Category> categories;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column(nullable = false, unique = true)
     private String name;
 
+    @NotNull
     @Column(nullable = false)
     private Integer price;
 
+    @NotNull
     @Column(nullable = false)
     private Integer salePrice;
 

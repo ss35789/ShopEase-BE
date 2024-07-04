@@ -3,26 +3,34 @@ package com.shopease.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
-public class CartItem {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartKey;
+    private Long addrKey;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userKey", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "itemKey", nullable = false)
-    private Item item;
+    @NotNull
+    @Column(nullable = false)
+    private String name;
 
     @NotNull
     @Column(nullable = false)
-    private Integer quantity;
+    private String address;
+
+    @NotNull
+    @Column(nullable = false)
+    private String tel;
+
+    @NotNull
+    @Column
+    private String req = "조심히 와주세요";
+
+    public Address(){}
 }
