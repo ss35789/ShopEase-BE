@@ -1,6 +1,6 @@
-package com.shopease.repository;
+package com.shopease.shop_ease_backend.repository;
 
-import com.shopease.model.User;
+import com.shopease.shop_ease_backend.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
