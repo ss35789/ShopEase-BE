@@ -2,7 +2,7 @@ package com.shopease.shop_ease_backend.controller;
 
 import com.shopease.shop_ease_backend.domain.User;
 import com.shopease.shop_ease_backend.dto.LoginRequest;
-import com.shopease.shop_ease_backend.service.UserService;
+import com.shopease.shop_ease_backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend.service;
+package com.shopease.shop_ease_backend.service.user;
 
 import com.shopease.shop_ease_backend.domain.User;
 import com.shopease.shop_ease_backend.dto.LoginRequest;
