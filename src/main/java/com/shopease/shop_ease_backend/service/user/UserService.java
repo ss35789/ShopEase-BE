@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public void registerUser(User user) throws Exception{
-        if(findByEmail(user.getEmail()) == null){
+        if(findByEmail(user.getEmail()) != null){
             throw new Exception("Email is already in use");
         }
         save(user);
