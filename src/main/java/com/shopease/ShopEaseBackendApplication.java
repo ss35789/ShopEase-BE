@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend;
+package com.shopease;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
