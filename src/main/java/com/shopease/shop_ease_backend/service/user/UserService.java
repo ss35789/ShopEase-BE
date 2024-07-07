@@ -1,8 +1,10 @@
 package com.shopease.shop_ease_backend.service.user;
 
 import com.shopease.shop_ease_backend.domain.User;
+import com.shopease.shop_ease_backend.dto.UserDTO;
 import com.shopease.shop_ease_backend.dto.LoginRequest;
 import com.shopease.shop_ease_backend.repository.UserRepository;
+import com.shopease.shop_ease_backend.exception.CustomException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,31 +23,52 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public User save(User user) { // 회원가입
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // password 암호화
-        return userRepository.save(user);
+    public UserDTO save(UserDTO userDTO) { // 회원가입
+        if (userRepository.findByEmail(userDTO.getEmail()) != null) {
+            throw new CustomException("Email is already in use");
+        }
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword())); // 암호화된 비밀번호 설정
+        User user = convertToEntity(userDTO);
+        User savedUser = userRepository.save(user);
+        return convertToDTO(savedUser);
     }
 
-    public User userLogin(LoginRequest loginRequest) throws Exception {
+    public UserDTO userLogin(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = userRepository.findByEmail(loginRequest.getEmail());
         if (user == null) {
-            throw new Exception("Invalid email or password");
+            throw new CustomException("Invalid email or password");
         }
-        return user;
+        return convertToDTO(user);
     }
 
-    public void registerUser(User user) throws Exception{
-        if(findByEmail(user.getEmail()) != null){
-            throw new Exception("Email is already in use");
-        }
-        save(user);
+    public UserDTO findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null ? convertToDTO(user) : null;
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    private User convertToEntity(UserDTO userDTO) {
+        return new User(
+                userDTO.getUserKey(),
+                userDTO.getUserName(),
+                userDTO.getEmail(),
+                userDTO.getPassword(),
+                userDTO.getTel(),
+                null,
+                null
+        );
+    }
+
+    private UserDTO convertToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserKey(user.getUserKey());
+        userDTO.setUserName(user.getUserName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setTel(user.getTel());
+        return userDTO;
     }
 }

@@ -1,7 +1,7 @@
 package com.shopease.shop_ease_backend.controller;
 
-import com.shopease.shop_ease_backend.domain.User;
 import com.shopease.shop_ease_backend.dto.LoginRequest;
+import com.shopease.shop_ease_backend.dto.UserDTO;
 import com.shopease.shop_ease_backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,9 +16,9 @@ public class LoginController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
         try {
-            userService.registerUser(user);
+            userService.save(userDTO);
             return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -28,7 +28,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         try {
-            User loggedInUser = userService.userLogin(loginRequest);
+            UserDTO loggedInUser = userService.userLogin(loginRequest);
             return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);

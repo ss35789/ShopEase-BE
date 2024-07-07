@@ -2,12 +2,16 @@ package com.shopease.shop_ease_backend.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -30,20 +34,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String tel;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CartItem> cartItemList;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Address> addressList;
-
-
-
-    public User(){}
-
-    public User(String userName, String email, String password, String tel) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.tel = tel;
-    }
 }
