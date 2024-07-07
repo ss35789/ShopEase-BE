@@ -28,7 +28,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         try {
-            UserDTO loggedInUser = userService.userLogin(loginRequest);
+            UserDTO loggedInUser = userService.findByEmail(loginRequest.getEmail());
             return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
