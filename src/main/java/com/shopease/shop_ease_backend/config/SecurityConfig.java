@@ -1,6 +1,7 @@
 package com.shopease.shop_ease_backend.config;
 
 import com.shopease.shop_ease_backend.filter.LoginFilter;
+import com.shopease.shop_ease_backend.filter.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +27,12 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
-
-
+    private final JwtUtil jwtUtil;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-        LoginFilter loginFilter = new LoginFilter(authenticationManager);
+        LoginFilter loginFilter = new LoginFilter(authenticationManager, userDetailsService, jwtUtil);
+        loginFilter.setFilterProcessesUrl("/api/user/login"); // 로그인 URL 설정
 
         http
                 .cors(withDefaults()) // CORS 설정 추가
@@ -63,4 +64,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }

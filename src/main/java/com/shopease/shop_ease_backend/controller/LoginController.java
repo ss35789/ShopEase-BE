@@ -24,14 +24,14 @@ public class LoginController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-        try {
-            UserDTO loggedInUser = userService.findByEmail(loginRequest.getEmail());
-            return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
-        }
-    }
+//      로그인 부분은 SecurityFilterChain의 LoginFilter에서 처리됨으로 필요없음
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+//        try {
+//            UserDTO loggedInUser = userService.findByEmail(loginRequest.getEmail());
+//            return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+//        }
+//    }
 }

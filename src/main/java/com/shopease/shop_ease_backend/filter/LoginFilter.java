@@ -2,13 +2,17 @@ package com.shopease.shop_ease_backend.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopease.shop_ease_backend.dto.LoginRequest;
+import com.shopease.shop_ease_backend.filter.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.core.userdetails.UserDetails;
+import com.shopease.shop_ease_backend.dto.UserDTO;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,6 +24,8 @@ import java.io.IOException;
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -37,7 +43,23 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authResult);
-        // JWT 토큰 발급 등의 추가적인 성공 처리 로직을 여기에 추가할 수 있습니다.
+
+        String authorizationHeader = request.getHeader("Authorization");
+
+        // JWT 토큰 발급 등의 추가적인 성공 처리 로직
+        UserDetails userDetails = (UserDetails) authResult.getPrincipal();
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(userDetails.getUsername());
+        userDTO.setPassword(""); // 비밀번호는 클레임에 포함하지 않습니다.
+
+        String accessToken = jwtUtil.createAccessToken(userDTO);
+
+        response.setHeader("Authorization", "Bearer " + accessToken);
+
+
+
+
+
     }
 
     @Override
