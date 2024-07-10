@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend.filter.jwt;
+package com.shopease.shop_ease_backend.util;
 
 import com.shopease.shop_ease_backend.dto.UserDTO;
 import io.jsonwebtoken.*;
