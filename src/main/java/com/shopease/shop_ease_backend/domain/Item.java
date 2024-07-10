@@ -1,4 +1,4 @@
-package com.shopease.domain;
+package com.shopease.shop_ease_backend.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
