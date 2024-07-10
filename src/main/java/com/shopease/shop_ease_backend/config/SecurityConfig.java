@@ -47,7 +47,6 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .httpBasic(httpBasic -> httpBasic.disable());
 
-        http.addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
