@@ -20,13 +20,24 @@ public class UserDTO {
 
     @NotBlank(message = "Telephone number is mandatory")
     private String tel;
-    public UserDTO(){};
 
-    public UserDTO(String userName, String email, String password, String tel) {
+    // 기본 생성자
+    public UserDTO() {}
+
+    // 모든 필드를 포함하는 생성자
+    public UserDTO(Long userKey, String userName, String email, String password, String tel) {
+        this.userKey = userKey;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.tel = tel;
     }
 
+    // 일부 필드만 포함하는 생성자
+    public UserDTO(String userName, String email, String password, String tel) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.tel = tel;
+    }
 }
