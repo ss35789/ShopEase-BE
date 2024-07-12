@@ -33,12 +33,14 @@ public class ItemDTO {
 
     public ItemDTO() {}
 
-    public ItemDTO(String name, Integer price, Integer salePrice, String content) {
+    public ItemDTO(Long itemKey, String name, Integer price, Integer salePrice, String content, LocalDateTime uploadDate, String img) {
+        this.itemKey = itemKey;
         this.name = name;
         this.price = price;
         this.salePrice = salePrice;
         this.content = content;
+        this.uploadDate = uploadDate;
+        this.img = img;
     }
-
 
 }
