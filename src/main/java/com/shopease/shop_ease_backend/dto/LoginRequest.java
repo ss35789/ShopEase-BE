@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend.dto.login;
+package com.shopease.shop_ease_backend.dto;
 
 import lombok.Data;
 
