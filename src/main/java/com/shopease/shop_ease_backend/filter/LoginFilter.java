@@ -1,7 +1,7 @@
 package com.shopease.shop_ease_backend.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shopease.shop_ease_backend.dto.LoginRequest;
+import com.shopease.shop_ease_backend.dto.login.LoginRequest;
 import com.shopease.shop_ease_backend.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
