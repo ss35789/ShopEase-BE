@@ -36,11 +36,7 @@ public class SecurityConfig {
                 .cors(withDefaults()) // CORS 설정 추가
                 .csrf(csrf -> csrf.disable())  // CSRF 보호 비활성화
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers("/api/items",
-                                "/api/items/{itemKey}",
-                                "/api/user/register",
-                                "/api/user/login",
-                                "/api/user/logout").permitAll()
+                        .requestMatchers("/api/user/register", "/api/user/login", "/api/user/logout").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
