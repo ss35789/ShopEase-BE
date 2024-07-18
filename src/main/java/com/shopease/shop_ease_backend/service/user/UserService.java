@@ -23,6 +23,7 @@ public class UserService {
             throw new CustomException("Email is already in use");
         }
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword())); // 암호화된 비밀번호 설정
+        userDTO.setRole("ROLE_USER");
         User user = convertToEntity(userDTO);
         User savedUser = userRepository.save(user);
         return convertToDTO(savedUser);
@@ -41,6 +42,7 @@ public class UserService {
                 userDTO.getEmail(),
                 userDTO.getPassword(),
                 userDTO.getTel(),
+                userDTO.getRole(),
                 null,
                 null
         );
@@ -53,6 +55,7 @@ public class UserService {
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
         userDTO.setTel(user.getTel());
+        userDTO.setRole(user.getRole());
         return userDTO;
     }
 }

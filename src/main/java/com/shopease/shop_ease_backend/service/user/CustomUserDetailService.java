@@ -3,16 +3,18 @@ package com.shopease.shop_ease_backend.service.user;
 import com.shopease.shop_ease_backend.domain.User;
 import com.shopease.shop_ease_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -24,6 +26,7 @@ public class UserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
 }
