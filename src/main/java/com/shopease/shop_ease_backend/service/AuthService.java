@@ -1,7 +1,7 @@
 package com.shopease.shop_ease_backend.service;
 
-import com.shopease.shop_ease_backend.dto.login.AuthResponse;
-import com.shopease.shop_ease_backend.dto.login.LoginRequest;
+import com.shopease.shop_ease_backend.dto.AuthResponse;
+import com.shopease.shop_ease_backend.dto.LoginRequest;
 import com.shopease.shop_ease_backend.dto.UserDTO;
 import com.shopease.shop_ease_backend.util.JwtUtil;
 import com.shopease.shop_ease_backend.service.user.UserService;
