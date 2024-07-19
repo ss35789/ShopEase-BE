@@ -37,12 +37,12 @@ public class SecurityConfig {
                 .cors(withDefaults()) // CORS 설정 추가
                 .csrf(csrf -> csrf.disable())  // CSRF 보호 비활성화
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers(
+                        .requestMatchers("/api/items",
+                                "/api/items/{itemKey}",
                                 "/api/user/register",
                                 "/api/user/login",
                                 "/api/user/logout").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/items").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/api/items").hasRole("ADMIN")
 
