@@ -1,7 +1,7 @@
 package com.shopease.shop_ease_backend.service.user;
 
 import com.shopease.shop_ease_backend.domain.User;
-import com.shopease.shop_ease_backend.dto.UserDTO;
+import com.shopease.shop_ease_backend.dto.modelDTO.UserDTO;
 import com.shopease.shop_ease_backend.repository.UserRepository;
 import com.shopease.shop_ease_backend.exception.CustomException;
 import jakarta.transaction.Transactional;

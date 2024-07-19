@@ -1,20 +1,23 @@
 package com.shopease.shop_ease_backend.service;
 
 import com.shopease.shop_ease_backend.domain.Item;
-import com.shopease.shop_ease_backend.dto.ItemDTO;
+import com.shopease.shop_ease_backend.dto.modelDTO.ItemDTO;
 import com.shopease.shop_ease_backend.exception.ItemNotFoundException;
 import com.shopease.shop_ease_backend.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ItemService {
 
     private final ItemRepository itemRepository;
+
 
     public List<ItemDTO> getItems() {
         List<Item> items = itemRepository.findAll();
@@ -30,6 +33,7 @@ public class ItemService {
     public ItemDTO delItem(Long itemKey) {
         Item existitem = itemRepository.findById(itemKey)
                 .orElseThrow(() -> new ItemNotFoundException("Item not found with key: " + itemKey));
+        log.info("delItem() in ItemService");
         itemRepository.delete(existitem);
         return convertToDTO(existitem);
     }

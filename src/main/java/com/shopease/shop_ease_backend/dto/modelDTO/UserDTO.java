@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend.dto;
+package com.shopease.shop_ease_backend.dto.modelDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

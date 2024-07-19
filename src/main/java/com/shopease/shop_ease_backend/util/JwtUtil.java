@@ -1,6 +1,6 @@
 package com.shopease.shop_ease_backend.util;
 
-import com.shopease.shop_ease_backend.dto.UserDTO;
+import com.shopease.shop_ease_backend.dto.modelDTO.UserDTO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

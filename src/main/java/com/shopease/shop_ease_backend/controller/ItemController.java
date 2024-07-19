@@ -1,6 +1,6 @@
 package com.shopease.shop_ease_backend.controller;
 
-import com.shopease.shop_ease_backend.dto.ItemDTO;
+import com.shopease.shop_ease_backend.dto.modelDTO.ItemDTO;
 import com.shopease.shop_ease_backend.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
