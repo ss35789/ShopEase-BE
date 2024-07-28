@@ -7,7 +7,7 @@ public class CookieUtil {
 
     public static void create(HttpServletResponse response, String name, String value, boolean secure, int maxAge, String path) {
         Cookie cookie = new Cookie(name, value);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
         cookie.setSecure(secure);
         cookie.setMaxAge(maxAge);
         cookie.setPath(path);
@@ -16,7 +16,7 @@ public class CookieUtil {
 
     public static void clear(HttpServletResponse response, String name) {
         Cookie cookie = new Cookie(name, null);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
         cookie.setSecure(true);
         cookie.setMaxAge(0);
         cookie.setPath("/");

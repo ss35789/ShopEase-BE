@@ -5,6 +5,7 @@ import com.shopease.shop_ease_backend.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,8 +30,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-        LoginFilter loginFilter = new LoginFilter(authenticationManager, userDetailsService, jwtUtil);
-        loginFilter.setFilterProcessesUrl("/api/user/login"); // 로그인 URL 설정
+//        LoginFilter loginFilter = new LoginFilter(authenticationManager, userDetailsService, jwtUtil);
+//        loginFilter.setFilterProcessesUrl("/api/user/login"); // 로그인 URL 설정
 
         http
                 .cors(withDefaults()) // CORS 설정 추가
@@ -41,14 +42,20 @@ public class SecurityConfig {
                                 "/api/user/register",
                                 "/api/user/login",
                                 "/api/user/logout").permitAll()
+
+
+                        .requestMatchers(HttpMethod.POST, "/api/items").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/items/{itemKey}").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+//                .addFilter(loginFilter)
                 .formLogin(form -> form.disable())
                 .httpBasic(httpBasic -> httpBasic.disable());
-
 
         return http.build();
     }
@@ -65,6 +72,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.shopease.shop_ease_backend.dto;
+package com.shopease.shop_ease_backend.dto.modelDTO;
 
 import com.shopease.shop_ease_backend.domain.Category;
 import jakarta.persistence.*;
