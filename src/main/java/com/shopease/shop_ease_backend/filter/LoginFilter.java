@@ -1,7 +1,7 @@
 package com.shopease.shop_ease_backend.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shopease.shop_ease_backend.dto.login.LoginRequest;
+import com.shopease.shop_ease_backend.dto.LoginRequest;
 import com.shopease.shop_ease_backend.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.shopease.shop_ease_backend.dto.UserDTO;
+import com.shopease.shop_ease_backend.dto.modelDTO.UserDTO;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

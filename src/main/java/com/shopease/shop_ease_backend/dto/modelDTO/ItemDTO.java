@@ -1,8 +1,8 @@
-package com.shopease.shop_ease_backend.dto;
+package com.shopease.shop_ease_backend.dto.modelDTO;
 
 import com.shopease.shop_ease_backend.domain.Category;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+        import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

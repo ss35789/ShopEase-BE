@@ -1,8 +1,8 @@
 package com.shopease.shop_ease_backend.controller;
 
-import com.shopease.shop_ease_backend.dto.login.AuthResponse;
-import com.shopease.shop_ease_backend.dto.login.LoginRequest;
-import com.shopease.shop_ease_backend.dto.UserDTO;
+import com.shopease.shop_ease_backend.dto.AuthResponse;
+import com.shopease.shop_ease_backend.dto.LoginRequest;
+import com.shopease.shop_ease_backend.dto.modelDTO.UserDTO;
 import com.shopease.shop_ease_backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
